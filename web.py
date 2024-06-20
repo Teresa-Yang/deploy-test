@@ -1,6 +1,6 @@
 import os
 import random
-# from pathlib import Path
+from pathlib import Path
 from flask import Flask, flash, send_from_directory, redirect, render_template, request, jsonify
 from flask_session import Session
 # from librosa import load
@@ -56,51 +56,51 @@ def showHomePage():
 
 #     return str(round(100 * scoring_functions_withVAD.score_pronunciation(proper_series, user_series))) + '%'
 
-# # Navigation to url will generate random choice and return to HTML
-# @app.route('/get_random_line', methods=['GET'])
-# def get_random_line():
-#     path = Path(__file__).parent.__str__() + "/reference_files.txt"
-#     lines = open(path, encoding="UTF-8").readlines()[1:]
-#     return random.choice(lines)
+# Navigation to url will generate random choice and return to HTML
+@app.route('/get_random_line', methods=['GET'])
+def get_random_line():
+    path = Path(__file__).parent.__str__() + "/reference_files.txt"
+    lines = open(path, encoding="UTF-8").readlines()[1:]
+    return random.choice(lines)
 
-# # Navigation will create GET request for website and POST request for audio data as mp3 file
-# @app.route('/save-record', methods=['GET', 'POST'])
-# def save_record():
-#     flash("saving")
-#     if request.method == "POST":
-#         # Sanity check on file existence
-#         if 'file' not in request.files:
-#             flash("Sorry! File not found!")
-#             redirect(request.url)
+# Navigation will create GET request for website and POST request for audio data as mp3 file
+@app.route('/save-record', methods=['GET', 'POST'])
+def save_record():
+    flash("saving")
+    if request.method == "POST":
+        # Sanity check on file existence
+        if 'file' not in request.files:
+            flash("Sorry! File not found!")
+            redirect(request.url)
 
-#         file = request.files['file']
+        file = request.files['file']
 
-#         # Sanity check that file is named correctly
-#         if file.filename == '':
-#             flash("Sorry! File name is empty!")
-#             redirect(request.url)
+        # Sanity check that file is named correctly
+        if file.filename == '':
+            flash("Sorry! File name is empty!")
+            redirect(request.url)
 
-#         # save file in hosts dir
-#         path = Path(__file__).parent.__str__() + f"/files/{file.filename}"
-#         file.save(path)
+        # save file in hosts dir
+        path = Path(__file__).parent.__str__() + f"/files/{file.filename}"
+        file.save(path)
 
-#         return "<h1>Success!</h1>"
+        return "<h1>Success!</h1>"
 
-#     # TODO: add scoring capability and return score
-#     if request.method == "GET":
-#         return ""
+    # TODO: add scoring capability and return score
+    if request.method == "GET":
+        return ""
 
 
-# @app.route('/get_random_audio/<audio_id>/', methods=['GET'])
-# def get_random_audio(audio_id):
-#     path = Path(__file__).parent.parent.__str__() + "/hackathon_data"
-#     audio_id = audio_id + ".wav"
-#     for file in os.listdir(path):
-#         if file.endswith(audio_id):
-#             return send_from_directory(
-#                 directory=path,
-#                 path=audio_id)
-#     return None
+@app.route('/get_random_audio/<audio_id>/', methods=['GET'])
+def get_random_audio(audio_id):
+    path = Path(__file__).parent.__str__() + "/hackathon_data"
+    audio_id = audio_id + ".wav"
+    for file in os.listdir(path):
+        if file.endswith(audio_id):
+            return send_from_directory(
+                directory=path,
+                path=audio_id)
+    return None
 
 
 if __name__ == "__main__":
