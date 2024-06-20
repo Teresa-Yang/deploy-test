@@ -1,6 +1,6 @@
 import os
 import random
-from pathlib import Path
+# from pathlib import Path
 from flask import Flask, flash, send_from_directory, redirect, render_template, request, jsonify
 from flask_session import Session
 # from librosa import load
@@ -9,9 +9,9 @@ from flask_session import Session
 
 
 
-_path = Path(__file__).parent.__str__() + "/files"
-if not os.path.exists(_path):
-    os.mkdir(_path)
+# _path = Path(__file__).parent.__str__() + "/files"
+# if not os.path.exists(_path):
+#     os.mkdir(_path)
 
 UPLOAD_FOLDER = 'files'
 app = Flask(__name__)
