@@ -2,7 +2,7 @@ import os
 import random
 from pathlib import Path
 from flask import Flask, flash, send_from_directory, redirect, render_template, request, jsonify
-# from flask_session import Session
+from flask_session import Session
 # from librosa import load
 # from FlaskServer.ScoringFunctions import scoring_functions_withVAD
 # import soundfile as sf
@@ -15,13 +15,13 @@ if not os.path.exists(_path):
 
 UPLOAD_FOLDER = 'files'
 app = Flask(__name__)
-# sess = Session()
+sess = Session()
 
 app.config['SECRET_KEY'] = 'secret_secret'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['SESSION_TYPE'] = 'filesystem'
 
-# sess.init_app(app)
+sess.init_app(app)
 
 # Dummy response to satisfy website if it does get request to .../favicon.ico
 @app.route('/favicon.ico', methods=['GET'])
