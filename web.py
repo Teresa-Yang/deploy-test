@@ -3,8 +3,8 @@ import random
 from pathlib import Path
 from flask import Flask, flash, send_from_directory, redirect, render_template, request, jsonify
 from flask_session import Session
-# from librosa import load
-# from FlaskServer.ScoringFunctions import scoring_functions_withVAD
+from librosa import load
+from ScoringFunctions import scoring_functions_withVAD
 # import soundfile as sf
 
 
@@ -42,19 +42,19 @@ def index():
 def showHomePage():
     return render_template('record.html', name=None)
 
-# # Get score from recently uploaded file
-# @app.route('/get_score/<audio_id>/', methods=['GET'])
-# def get_score(audio_id):
-#     # find user audio from "files"
-#     path_user = Path(__file__).parent.__str__() + "/files/" + audio_id + ".mp3"
+# Get score from recently uploaded file
+@app.route('/get_score/<audio_id>/', methods=['GET'])
+def get_score(audio_id):
+    # find user audio from "files"
+    path_user = Path(__file__).parent.__str__() + "/files/" + audio_id + ".mp3"
 
-#     # find corresponding proper audio
-#     path_proper = Path(__file__).parent.parent.__str__() + "/hackathon_data/" + audio_id + ".wav"
+    # find corresponding proper audio
+    path_proper = Path(__file__).parent.parent.__str__() + "/hackathon_data/" + audio_id + ".wav"
 
-#     user_series, sr = load(path_user, sr=16000)
-#     proper_series, sr = load(path_proper, sr=16000)
+    user_series, sr = load(path_user, sr=16000)
+    proper_series, sr = load(path_proper, sr=16000)
 
-#     return str(round(100 * scoring_functions_withVAD.score_pronunciation(proper_series, user_series))) + '%'
+    return str(round(100 * scoring_functions_withVAD.score_pronunciation(proper_series, user_series))) + '%'
 
 # Navigation to url will generate random choice and return to HTML
 @app.route('/get_random_line', methods=['GET'])
