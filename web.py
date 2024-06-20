@@ -9,9 +9,9 @@ from flask_session import Session
 
 
 
-# _path = Path(__file__).parent.__str__() + "/files"
-# if not os.path.exists(_path):
-#     os.mkdir(_path)
+_path = Path(__file__).parent.__str__() + "/files"
+if not os.path.exists(_path):
+    os.mkdir(_path)
 
 UPLOAD_FOLDER = 'files'
 app = Flask(__name__)
