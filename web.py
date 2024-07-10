@@ -49,7 +49,7 @@ def get_score(audio_id):
     path_user = Path(__file__).parent.__str__() + "/files/" + audio_id + ".mp3"
 
     # find corresponding proper audio
-    path_proper = Path(__file__).parent.parent.__str__() + "/hackathon_data/" + audio_id + ".wav"
+    path_proper = Path(__file__).parent.__str__() + "/hackathon_data/" + audio_id + ".wav"
 
     user_series, sr = load(path_user, sr=16000)
     proper_series, sr = load(path_proper, sr=16000)
