@@ -2,11 +2,9 @@ import os
 import random
 from pathlib import Path
 from flask import Flask, flash, send_from_directory, redirect, render_template, request
-# from flask_session import Session
 from librosa import load
 # from ScoringFunctions import scoring_functions_withVAD
 from ScoringFunctions import scoring_functions
-# import soundfile as sf
 
 
 
@@ -16,13 +14,11 @@ if not os.path.exists(_path):
 
 UPLOAD_FOLDER = 'files'
 app = Flask(__name__)
-# sess = Session()
 
 app.config['SECRET_KEY'] = 'secret_secret'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['SESSION_TYPE'] = 'filesystem'
 
-# sess.init_app(app)
 
 # Dummy response to satisfy website if it does get request to .../favicon.ico
 @app.route('/favicon.ico', methods=['GET'])
@@ -30,10 +26,6 @@ def favicon():
     return '<h1></h1>'
 
 # # Home page, render the "index.html" template
-# @app.route('/')
-# def home():
-#     return render_template('record.html', name=None)
-
 @app.route('/')
 def index():
     return redirect('/home', code=302)
@@ -107,9 +99,3 @@ def get_random_audio(audio_id):
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-# def run(host, port, debug):
-#     app.run(host, port, debug)
-#     print("Web Server Running...")
-# def run(host, port):
-#     app.run(host, port)
