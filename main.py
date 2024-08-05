@@ -3,8 +3,8 @@ import random
 from pathlib import Path
 from flask import Flask, flash, send_from_directory, redirect, render_template, request
 from librosa import load
-# from ScoringFunctions import scoring_functions_withVAD
-from ScoringFunctions import scoring_functions
+from ScoringFunctions import scoring_functions_withVAD
+# from ScoringFunctions import scoring_functions
 
 
 
@@ -47,8 +47,8 @@ def get_score(audio_id):
     user_series, sr = load(path_user, sr=16000)
     proper_series, sr = load(path_proper, sr=16000)
 
-    # return str(round(100 * scoring_functions_withVAD.score_pronunciation(proper_series, user_series))) + '%'
-    return str(round(100 * scoring_functions.score_pronunciation(proper_series, user_series))) + '%'
+    return str(round(100 * scoring_functions_withVAD.score_pronunciation(proper_series, user_series))) + '%'
+    # return str(round(100 * scoring_functions.score_pronunciation(proper_series, user_series))) + '%'
 
 # Navigation to url will generate random choice and return to HTML
 @app.route('/get_random_line', methods=['GET'])
