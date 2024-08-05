@@ -11,6 +11,7 @@ let record = null;
 let audioChunks = [];
 
 score_button_element.onclick = () => {
+    score_button_element.disabled = true;
     $.ajax({
         type: 'GET',
         url: '/get_score/' + audio_name + "/",
@@ -22,8 +23,9 @@ score_button_element.onclick = () => {
 
 
 stop_button_element.onclick = () => {
-    start_button_element.disabled = false;
     stop_button_element.disabled = true;
+    score_button_element.disabled = false;
+    start_button_element.disabled = false;
     record.stop();
 };
 
@@ -36,6 +38,8 @@ start_button_element.onclick = () => {
 
 random_button_element.onclick = () => {
     start_button_element.disabled = false;
+    stop_button_element.disabled = true;
+    score_button_element.disabled = true;
     $.ajax(
         {
             type: 'GET',
